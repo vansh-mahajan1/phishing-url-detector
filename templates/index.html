@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing URL Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f4f9;
+            margin: 0;
+            padding: 40px 16px;
+        }
+        .box {
+            max-width: 620px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        h1 { margin-top: 0; color: #1f3b73; }
+        p.sub { color: #555; margin-top: -8px; }
+        form { display: flex; gap: 10px; margin: 24px 0; }
+        input[type=text] {
+            flex: 1;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #c5cbd6;
+            border-radius: 8px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 15px;
+            background: #1f3b73;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover { background: #2c529c; }
+        .result { padding: 16px; border-radius: 8px; }
+        .Safe { background: #e3f6e8; border-left: 6px solid #2e9e4f; }
+        .Suspicious { background: #fff6dc; border-left: 6px solid #d9a200; }
+        .Phishing { background: #fde4e4; border-left: 6px solid #d12f2f; }
+        .result h2 { margin: 0 0 6px 0; }
+        .url { word-break: break-all; color: #333; }
+        footer { text-align: center; color: #888; font-size: 13px; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Phishing URL Detector</h1>
+        <p class="sub">Paste any link to check if it looks safe or fake.</p>
+
+        <form method="POST">
+            <input type="text" name="url" placeholder="e.g. http://paypal-login.verify.tk" required>
+            <button type="submit">Check</button>
+        </form>
+
+        {% if report %}
+        <div class="result {{ report.result }}">
+            <h2>{{ report.result }}</h2>
+            <p class="url"><b>URL:</b> {{ report.url }}</p>
+            <p><b>Risk score:</b> {{ report.score }}</p>
+            {% if report.reasons %}
+            <b>Why?</b>
+            <ul>
+                {% for reason in report.reasons %}
+                <li>{{ reason }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No warning signs found.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <footer>VCS Mini Project &middot; Vansh, Gaurav, Aditya</footer>
+    </div>
+</body>
+</html>
