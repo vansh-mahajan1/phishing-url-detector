@@ -1,0 +1,13 @@
+# Sample URLs for testing (one per line)
+# --- real / safe ---
+https://www.google.com
+https://github.com
+https://www.sbi.co.in
+https://accounts.google.com/signin
+# --- fake / phishing examples (made up, do NOT open) ---
+http://paypal-secure-login.verify-account.tk/signin
+http://192.168.10.5/login.php
+bit.ly/3xYzAbc
+http://amazon.com.account-update.xyz/confirm
+http://www.netflix-free-premium.top/claim?bonus=1
+https://www.google.com@evil-site.ml/login
