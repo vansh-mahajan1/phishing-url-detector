@@ -79,11 +79,17 @@ python3 main.py
 
 # Web page
 pip install -r requirements.txt
-python3 app.py          # open http://127.0.0.1:5000
+python3 app.py          # open http://127.0.0.1:5050
 
 # Tests
 python3 -m unittest test_detector.py -v
 ```
+
+## Live website (Vercel)
+
+The web page is hosted on **Vercel**. Vercel finds the `app` object in
+`app.py` and installs Flask from `requirements.txt` automatically, so no
+extra config file is needed. Every `git push` to `main` makes a new deployment.
 
 ## Example output
 
