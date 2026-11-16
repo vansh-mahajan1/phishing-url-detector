@@ -77,9 +77,13 @@ def check_url(url):
         reasons.append("Domain name contains '-' (common in fake sites)")
 
     # Rule 6: too many sub-domains, e.g. login.paypal.com.secure.xyz
-    if domain.count(".") >= 3:
+    # ("www." and endings like ".co.in" are normal, so we don't count them)
+    dots = domain.removeprefix("www.").count(".")
+    if domain.endswith((".co.in", ".co.uk", ".gov.in", ".ac.in", ".org.in")):
+        dots -= 1
+    if dots >= 3:
         score += 2
-        reasons.append("Too many sub-domains (" + str(domain.count(".")) + " dots)")
+        reasons.append("Too many sub-domains (" + str(dots) + " dots)")
 
     # Rule 7: suspicious words
     found_words = [word for word in SUSPICIOUS_WORDS if word in lower_url]
@@ -125,11 +129,19 @@ def check_url(url):
 
 
 def is_official_domain(domain, brand):
-    """True if domain is like 'paypal.com' or 'www.paypal.com' or 'paypal.co.in'."""
+    """
+    True if the main part of the domain is exactly the brand, e.g.
+    paypal.com, www.paypal.com, accounts.google.com, sbi.co.in
+    False for fakes like paypal-login.com or paypal.com.verify.tk
+    """
     parts = domain.split(".")
-    if parts[0] == "www":
-        parts = parts[1:]
-    return len(parts) >= 2 and parts[0] == brand and len(parts) <= 3 and "-" not in domain
+    if len(parts) >= 3 and parts[-2] in ("co", "com", "gov", "org", "ac"):
+        main_name = parts[-3]      # sbi.co.in -> "sbi"
+    elif len(parts) >= 2:
+        main_name = parts[-2]      # accounts.google.com -> "google"
+    else:
+        return False
+    return main_name == brand
 
 
 def get_result(score):
