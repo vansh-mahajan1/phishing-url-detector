@@ -4,7 +4,7 @@ app.py - simple web page for the Phishing URL Detector (made with Flask).
 How to run:
     pip install -r requirements.txt
     python3 app.py
-Then open http://127.0.0.1:5000 in your browser.
+Then open http://127.0.0.1:5050 in your browser.
 """
 
 from flask import Flask, render_template, request
@@ -24,4 +24,5 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # port 5050 because macOS uses port 5000 for AirPlay
+    app.run(debug=True, port=5050)
