@@ -82,9 +82,19 @@ These are all the commands we used to build and manage this project, in order.
 | `gh repo view` | Shows the GitHub repository details in the terminal |
 | `git clone https://github.com/vansh-mahajan1/phishing-url-detector.git` | Downloads a fresh copy to check everything was pushed |
 
+## 8. Deploying to Vercel
+
+| Command | What it does |
+|---------|--------------|
+| `git checkout -b feature/vercel-deploy` | New branch for the deployment changes |
+| `git commit -m "Prepare project for Vercel deployment"` | Commits the port fix, pinned Flask version and README notes |
+| `git merge feature/vercel-deploy` | Merges it into `main` |
+| `git push origin main` | Vercel sees the push and deploys the site automatically |
+| `gh repo edit --homepage <url>` | Adds the live website link to the GitHub repo page |
+
 ## Summary
 
 **Git:** `init`, `config`, `status`, `add`, `commit`, `log`, `diff`, `branch`, `checkout`, `merge`,
 `remote`, `push`, `pull`, `tag`, `clone`
 
-**GitHub CLI:** `gh auth status`, `gh repo create`, `gh repo view`
+**GitHub CLI:** `gh auth status`, `gh repo create`, `gh repo view`, `gh repo edit`

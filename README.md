@@ -1,5 +1,7 @@
 # Phishing URL Detector
 
+**Live demo:** https://phishing-url-detector-zeta-lake.vercel.app
+
 A simple **rule-based phishing URL detector** written in Python.
 You give it a website link and it tells you whether the link looks
 **Safe**, **Suspicious** or **Phishing**, along with the reasons.
